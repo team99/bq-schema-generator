@@ -3,14 +3,14 @@ from typing import Any, Dict, Optional, Union, Literal
 import logging
 
 AllowedTypes = Union[dict, bool, float, int, str, list]
-AllowedBQDataType = Literal["BOOLEAN", "INT", "FLOAT", "STRING", "RECORD", "NULL"]
+AllowedBQDataType = Literal["BOOLEAN", "INTEGER", "FLOAT", "STRING", "RECORD", "NULL"]
 BQMode = Literal["NULLABLE", "REQUIRED", "REPEATED"]
 
 INT_MODE_TYPE_TO_BQ_DATA_TYPE: dict[type, AllowedBQDataType] = {
     dict: "RECORD",
     bool: "BOOLEAN",
     float: "FLOAT",
-    int: "INT",
+    int: "INTEGER",
     str: "STRING",
     type(None): "NULL",
 }
@@ -23,7 +23,7 @@ TYPE_TO_BQ_DATA_TYPE: dict[type, AllowedBQDataType] = {
 # i.e. right side can overwrite left side
 INT_MODE_TYPE_HIERARCHY: dict[AllowedBQDataType, list[AllowedBQDataType]] = {
     "BOOLEAN": ["STRING", "RECORD"],
-    "INT": ["FLOAT", "STRING", "RECORD"],
+    "INTEGER": ["FLOAT", "STRING", "RECORD"],
     "FLOAT": ["STRING", "RECORD"],
     "STRING": ["RECORD"],
     "RECORD": [],
